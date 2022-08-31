@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    Honeypots Admin Dashboard
+  </title>
+  <!-- Favicon -->
+  <link href="./assets/img/brand/logo.png" rel="icon" type="image/jpeg">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="./assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+  <style>
+    canvas {
+      position: absolute;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body class="">
+  <div class="main-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Dashboard</a>
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <a class="nav-link pr-0">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <img alt="Image placeholder" src="./assets/img/brand/logo.jpg">
+              </span>
+              <div class="media-body ml-2 d-none d-lg-block">
+                <span class="mb-0 text-sm  font-weight-bold">꿀단지</span>
+              </div>
+            </div>
+          </a>
+        </ul>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total Users</h5>
+                      <span class="h2 font-weight-bold mb-0" id="totalMemberCount">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                        <i class="fas fa-users"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2" id="totalMemberCountCompare"><i class="fa fa-arrow-up"></i>-</span>
+                    <span class="text-nowrap">Since Last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total Posts</h5>
+                      <span class="h2 font-weight-bold mb-0" id="totalPostCount">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                        <i class="fas fa-chart-bar"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-danger mr-2" id="totalPostCountCompare"><i class="fas fa-arrow-down"></i></span>
+                    <span class="text-nowrap">Since Last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total Comments</h5>
+                      <span class="h2 font-weight-bold mb-0" id="totalCommentCount">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                        <i class="fas fa-chart-bar"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-warning mr-2" id="totalCommentCountCompare"><i class="fas fa-arrow-down"></i></span>
+                    <span class="text-nowrap">Since Last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total Likes</h5>
+                      <span class="h2 font-weight-bold mb-0" id="totalLikeReactionCount">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                        <i class="fas fa-chart-bar"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2" id="totalLikeReactionCountCompare"><i class="fas fa-arrow-up"></i></span>
+                    <span class="text-nowrap">Total period</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-6 mb-5 mb-xl-0">
+          <div class="card bg-gradient-default shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-light ls-1 mb-1">Statistics</h6>
+                  <h2 class="text-white mb-0">Joined Member</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <!-- Chart wrapper -->
+                <canvas id="joinedMemberChart" style="width: 100%; height: 100%; position: relative;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">Statistics</h6>
+                  <h2 class="mb-0">Active Users</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <canvas id="activeUserChart" style="width: 100%; height: 100%; position: relative;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+          <div class="col-xl-6">
+            <div class="copyright text-center text-xl-left text-muted">
+              &copy; 2022 <a href="" class="font-weight-bold ml-1" target="_blank">HoneyPots</a>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+              <li class="nav-item">
+                <a href="https://github.com/HoneyPots" class="nav-link" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://github.com/HoneyPots" class="nav-link" target="_blank">GitHub</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- Core -->
+  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JS -->
+  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  
+  <script>
+    let today = new Date();
+    let lastWeek = new Date(today);
+    lastWeek.setDate(today.getDate() - 7);
+
+    let todayYMD = getFormatDate(today, '');
+    let lastWeekYMD = getFormatDate(lastWeek, '');
+
+    // KPI - User Engagement
+    fetch('http://localhost:8090/api/admin/kpi?type=userEngagement&from=20220817&to=' + todayYMD)
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("totalMemberCount").innerHTML = data.totalMemberCount;
+      document.getElementById("totalPostCount").innerHTML = data.totalPostCount;
+      document.getElementById("totalCommentCount").innerHTML = data.totalCommentCount;
+      document.getElementById("totalLikeReactionCount").innerHTML = data.totalLikeReactionCount;
+
+      fetch('http://localhost:8090/api/admin/kpi?type=userEngagement&from=20220817&to=' + lastWeekYMD)
+      .then((response) => response.json())
+      .then((data) => {
+        renderKpiCompareIcon('totalMemberCount', data.totalMemberCount);
+        renderKpiCompareIcon('totalPostCount', data.totalPostCount);
+        renderKpiCompareIcon('totalCommentCount', data.totalCommentCount);
+      });
+    });
+
+    // KPI - Joined member count by date
+    let serviceStartDate = new Date('2022-08-17');
+    let serviceStartDateYMD = getFormatDate(serviceStartDate, '');
+
+    fetch('http://localhost:8090/api/admin/kpi?type=joinMemberCount&from=' + serviceStartDateYMD + '&to=' + todayYMD)
+    .then((response) => response.json())
+    .then((data) => {
+      drawJoinedMemberKpiChart(document.getElementById('joinedMemberChart'), serviceStartDate, today, data);
+      // console.log(data);
+    });
+
+    // KPI - Active user count
+    fetch('http://localhost:8090/api/admin/kpi?type=activeUserCount&from=' + serviceStartDateYMD + '&to=' + todayYMD)
+    .then((response) => response.json())
+    .then((data) => {
+      drawActiveUserKpiChart(document.getElementById('activeUserChart'), serviceStartDate, today, data);
+      // console.log(data);
+    });
+
+    // Functions ========================
+
+    function renderKpiCompareIcon(id, compare) {
+      let base = document.getElementById(id).innerHTML;
+      let arrowIcon = base >= compare ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>';
+      document.getElementById(id + 'Compare').innerHTML =  arrowIcon + ' ' + (base - compare);
+    }
+    
+    function getFormatDate(date, delimiter){
+      var month = (1 + date.getMonth());          
+      month = month >= 10 ? month : '0' + month; 
+      var day = date.getDate();                  
+      day = day >= 10 ? day : '0' + day;         
+      return  date.getFullYear() + delimiter + month + delimiter + day;      
+    }
+
+    function drawJoinedMemberKpiChart(chartDiv, fromDate, toDate, data) {
+      const labels = createGraphDateLabels(new Date(fromDate), new Date(toDate))
+      const createdData = createJoinMemberChartDataByDate(new Date(fromDate), new Date(toDate), data);
+      const chartData = {
+        labels: labels,
+        datasets: [{
+          label: '가입 회원 수',
+          data: createdData,
+          fill: {
+                  target: 'origin',
+                  above: '#5c649042', 
+                },
+          borderColor: '#5e72e4',
+          tension: 0.1,
+          borderWidth: 2
+        }]
+      }; 
+
+      const joinedMemberChart = new Chart(chartDiv, 
+        {
+          type: 'line',
+          data: chartData,
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            scales: {
+                y: {
+                    min: 0
+                }
+            }
+          },
+        }
+      );
+    }
+
+    function drawActiveUserKpiChart(chartDiv, fromDate, toDate, data) {
+      const labels = createGraphDateLabels(new Date(fromDate), new Date(toDate))
+      const createdData = createActiveUserChartDataByDate(new Date(fromDate), new Date(toDate), data);
+      const chartData = {
+        labels: labels,
+        datasets: [{
+          label: '활성 사용자 수',
+          data: createdData,
+          fill: {
+                  target: 'origin',
+                  above: '#5c649042', 
+                },
+          borderColor: '#5e72e4',
+          tension: 0.1,
+          borderWidth: 2
+        }]
+      }; 
+
+      const joinedMemberChart = new Chart(chartDiv, 
+        {
+          type: 'line',
+          data: chartData,
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            scales: {
+                y: {
+                    min: 0
+                }
+            }
+          },
+        }
+      );
+    }
+
+    function createGraphDateLabels(fromDate, toDate) {
+      let lastDate = toDate;
+      lastDate.setDate(toDate.getDate() + 1);
+
+      let result = [];
+      while(true){
+        result.push((fromDate.getMonth() + 1) + '/' + fromDate.getDate());
+
+        let nextDate = fromDate;
+        nextDate.setDate(fromDate.getDate() + 1);
+        if(getFormatDate(nextDate, '') == getFormatDate(lastDate, '')) {
+          break;
+        }
+      }
+      return result;
+    }
+
+    function createJoinMemberChartDataByDate(fromDate, toDate, data) {
+      let lastDate = toDate;
+      lastDate.setDate(toDate.getDate() + 1);
+
+      let result = [];
+      while(true){
+        let nextDate = fromDate;
+        let isNoValue = true;
+        for(var i = 0; i < data.length; i++) {
+          if(getFormatDate(new Date(data[i].date), '') == getFormatDate(nextDate, '')) {
+            isNoValue = false;
+            result.push(data[i].joinMemberCount);
+            break;    
+          }
+        }
+
+        if(isNoValue) {
+          result.push(0);
+        }
+
+        nextDate.setDate(fromDate.getDate() + 1);
+        if(getFormatDate(nextDate, '') == getFormatDate(lastDate, '')) {
+          break;
+        }
+      }
+      return result;
+    }
+
+    function createActiveUserChartDataByDate(fromDate, toDate, data) {
+      let lastDate = toDate;
+      lastDate.setDate(toDate.getDate() + 1);
+
+      let result = [];
+      while(true){
+        let nextDate = fromDate;
+        let isNoValue = true;
+        for(var i = 0; i < data.length; i++) {
+          if(getFormatDate(new Date(data[i].date), '') == getFormatDate(nextDate, '')) {
+            isNoValue = false;
+            result.push(data[i].count);
+            break;    
+          }
+        }
+
+        if(isNoValue) {
+          result.push(0);
+        }
+
+        nextDate.setDate(fromDate.getDate() + 1);
+        if(getFormatDate(nextDate, '') == getFormatDate(lastDate, '')) {
+          break;
+        }
+      }
+      return result;
+    }
+
+  </script>
+</body>
+
+</html>
